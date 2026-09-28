@@ -12,8 +12,8 @@ RUN npm install
 COPY . .
 
 # Build arg for API URL (needed at build time for Astro)
-ARG PUBLIC_API_URL=http://localhost:4000
-ENV PUBLIC_API_URL=$PUBLIC_API_URL
+ARG QAU_PUBLIC_API_URL
+ENV QAU_PUBLIC_API_URL=$QAU_PUBLIC_API_URL
 
 # Build the application
 RUN npm run build

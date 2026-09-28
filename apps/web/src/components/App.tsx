@@ -57,7 +57,11 @@ const workspaceTabLabels: Record<WorkspaceTab, string> = {
 const roleOptions: Role[] = ["User", "Admin", "Configurator"];
 const stickyNoteColors = ["#19352a", "#26482d", "#3b5c29", "#4d5b1f", "#3f2a4c"] as const;
 const maxStickyNotes = 10;
-const apiUrl = import.meta.env.PUBLIC_API_URL ?? "http://localhost:4000";
+const apiUrl = import.meta.env.QAU_PUBLIC_API_URL;
+
+if (!apiUrl) {
+  throw new Error("Missing required QAU_PUBLIC_API_URL environment variable.");
+}
 const tokenStorageKey = "qa-upskill-token";
 const emptyPersonDetails: PersonDetails = {
   addressLine1: "",

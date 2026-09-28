@@ -26,7 +26,13 @@ import { roles } from "./types.js";
 
 const app = express();
 const port = Number(process.env.PORT ?? 4000);
-const clientOrigin = process.env.CLIENT_ORIGIN ?? "http://localhost:4321";
+const requireEnv = (name: "QAU_CLIENT_ORIGIN" | "QAU_PUBLIC_API_URL") => {
+  const value = process.env[name];
+  if (!value) throw new Error(`Missing required ${name} environment variable.`);
+  return value;
+};
+const clientOrigin = requireEnv("QAU_CLIENT_ORIGIN");
+const publicApiUrl = requireEnv("QAU_PUBLIC_API_URL");
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -78,7 +84,7 @@ const canManageStickyNote = (authUser: AuthUser, stickyNote: StickyNote) =>
   authUser.role === "Admin" || authUser.role === "Configurator" || authUser.id === stickyNote.createdByUserId;
 
 const adminCredentials = bootstrapAdmin();
-const openApiSpec = createOpenApiSpec();
+const openApiSpec = createOpenApiSpec(publicApiUrl);
 
 app.use(
   cors({

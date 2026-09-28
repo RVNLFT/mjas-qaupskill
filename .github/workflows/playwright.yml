@@ -24,6 +24,8 @@ jobs:
           QAU_ADMIN_EMAIL: ${{ secrets.QAU_ADMIN_EMAIL }}
           QAU_ADMIN_PASSWORD: ${{ secrets.QAU_ADMIN_PASSWORD }}
           QAU_JWT_SECRET: ${{ secrets.QAU_JWT_SECRET }}
+          QAU_CLIENT_ORIGIN: ${{ secrets.QAU_CLIENT_ORIGIN }}
+          QAU_PUBLIC_API_URL: ${{ secrets.QAU_PUBLIC_API_URL }}
       - name: Upload HTML report
         if: always()
         uses: actions/upload-artifact@v4

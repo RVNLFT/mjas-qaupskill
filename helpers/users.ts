@@ -2,7 +2,7 @@ import { randomBytes, randomUUID } from "node:crypto";
 import { expect, request, type APIRequestContext } from "@playwright/test";
 import { requireEnv } from "./env";
 
-export const apiUrl = process.env.API_URL ?? "http://localhost:4000";
+export const apiUrl = requireEnv("QAU_PUBLIC_API_URL");
 
 export type TestUser = {
   id: number;

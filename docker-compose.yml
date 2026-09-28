@@ -7,7 +7,8 @@ services:
       - "4000:4000"
     environment:
       - PORT=4000
-      - CLIENT_ORIGIN=http://localhost:4321
+      - QAU_CLIENT_ORIGIN=${QAU_CLIENT_ORIGIN:?QAU_CLIENT_ORIGIN is required}
+      - QAU_PUBLIC_API_URL=${QAU_PUBLIC_API_URL:?QAU_PUBLIC_API_URL is required}
       - QAU_ADMIN_EMAIL=${QAU_ADMIN_EMAIL}
       - QAU_ADMIN_PASSWORD=${QAU_ADMIN_PASSWORD}
       - QAU_JWT_SECRET=${QAU_JWT_SECRET}
@@ -24,7 +25,7 @@ services:
       context: ./apps/web
       dockerfile: Dockerfile
       args:
-        - PUBLIC_API_URL=http://localhost:4000
+        - QAU_PUBLIC_API_URL=${QAU_PUBLIC_API_URL:?QAU_PUBLIC_API_URL is required}
     ports:
       - "4321:4321"
     environment:

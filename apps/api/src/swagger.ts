@@ -1,4 +1,4 @@
-export const createOpenApiSpec = () => ({
+export const createOpenApiSpec = (publicApiUrl: string) => ({
   openapi: "3.0.3",
   info: {
     title: "QA Upskill API",
@@ -7,8 +7,8 @@ export const createOpenApiSpec = () => ({
   },
   servers: [
     {
-      url: "http://localhost:4000",
-      description: "Local API server"
+      url: publicApiUrl,
+      description: "API server"
     }
   ],
   tags: [

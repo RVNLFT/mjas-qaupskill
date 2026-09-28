@@ -1,12 +1,20 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const requireEnv = (name: "QAU_CLIENT_ORIGIN") => {
+  const value = process.env[name];
+  if (!value) throw new Error(`Missing required ${name} environment variable.`);
+  return value;
+};
+
+const clientOrigin = requireEnv("QAU_CLIENT_ORIGIN");
+
 export default defineConfig({
   testDir: "./tests",
   globalTeardown: "./global-teardown.ts",
   fullyParallel: false,
   reporter: [["html", { open: "never" }]],
   use: {
-    baseURL: process.env.BASE_URL ?? "http://localhost:4321",
+    baseURL: clientOrigin,
     trace: "on-first-retry"
   },
   projects: [
@@ -36,7 +44,7 @@ export default defineConfig({
   ],
   webServer: {
     command: "npm run dev",
-    url: "http://localhost:4321",
+    url: clientOrigin,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000
   }
