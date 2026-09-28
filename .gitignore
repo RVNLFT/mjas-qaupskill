@@ -5,3 +5,6 @@ apps/api/data/*.db
 apps/api/data/*.db-*
 .DS_Store
 docs/bugs.md
+playwright-report/
+test-results/
+playwright/.auth/

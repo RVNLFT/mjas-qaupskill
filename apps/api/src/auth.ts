@@ -2,7 +2,11 @@ import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import type { AuthUser } from "./types.js";
 
-const jwtSecret = process.env.JWT_SECRET ?? "qa-upskill-dev-secret-change-me";
+const jwtSecret = process.env.QAU_JWT_SECRET;
+
+if (!jwtSecret) {
+  throw new Error("Missing required QAU_JWT_SECRET environment variable.");
+}
 const tokenExpiry = "8h";
 
 const tokenBlacklist = new Set<string>();

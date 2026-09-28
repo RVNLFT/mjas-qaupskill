@@ -15,8 +15,14 @@ db.exec("DELETE FROM sticky_notes");
 db.exec("DELETE FROM users");
 db.exec("DELETE FROM sqlite_sequence WHERE name IN ('users', 'sticky_notes')");
 
-const email = (process.env.QA_UPSKILL_ADMIN_EMAIL ?? "admin@qaupskill.local").trim().toLowerCase();
-const password = process.env.QA_UPSKILL_ADMIN_PASSWORD ?? "Admin123!";
+const adminEmail = process.env.QAU_ADMIN_EMAIL;
+const password = process.env.QAU_ADMIN_PASSWORD;
+
+if (!adminEmail || !password) {
+  throw new Error("Missing required QAU_ADMIN_EMAIL or QAU_ADMIN_PASSWORD environment variable.");
+}
+
+const email = adminEmail.trim().toLowerCase();
 const passwordHash = bcrypt.hashSync(password, 10);
 
 db.prepare("INSERT INTO users (full_name, email, password_hash, role) VALUES (?, ?, ?, ?)").run(
@@ -30,4 +36,3 @@ db.close();
 
 console.log("Database reset complete.");
 console.log(`Bootstrap admin email: ${email}`);
-console.log(`Bootstrap admin password: ${password}`);

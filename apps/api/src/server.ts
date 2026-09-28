@@ -135,7 +135,7 @@ app.get("/people", authenticate, requireAdmin, (_request, response) => {
   response.json(listUsers());
 });
 
-app.post("/people", authenticate, requireAdmin, (request, response) => {
+app.post(["/people", "/api/users"], authenticate, requireAdmin, (request, response) => {
   const parsed = createPersonSchema.safeParse(request.body);
 
   if (!parsed.success) {
@@ -184,7 +184,7 @@ app.patch("/people/:id/role", authenticate, requireAdmin, (request, response) =>
   }
 });
 
-app.delete("/people/:id", authenticate, requireAdmin, (request, response) => {
+app.delete(["/people/:id", "/api/users/:id"], authenticate, requireAdmin, (request, response) => {
   const id = Number(request.params.id);
 
   if (!Number.isInteger(id) || id < 1) {
@@ -360,5 +360,4 @@ app.listen(port, () => {
   console.log(`QA Upskill API running on http://localhost:${port}`);
   console.log(`Swagger UI available at http://localhost:${port}/docs`);
   console.log(`Bootstrap admin email: ${adminCredentials.email}`);
-  console.log(`Bootstrap admin password: ${adminCredentials.password}`);
 });

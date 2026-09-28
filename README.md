@@ -36,15 +36,10 @@ Clears all users and sticky notes, then re-creates the bootstrap admin:
 npm run reset-db
 ```
 
-## Bootstrap admin
+## Required environment variables
 
-- Email: `admin@qaupskill.local`
-- Password: `Admin123!`
-
-Override with environment variables:
-
-- `QA_UPSKILL_ADMIN_EMAIL`
-- `QA_UPSKILL_ADMIN_PASSWORD`
-- `JWT_SECRET`
+- `QAU_ADMIN_EMAIL`
+- `QAU_ADMIN_PASSWORD`
+- `QAU_JWT_SECRET`
 - `CLIENT_ORIGIN`
 - `PUBLIC_API_URL`

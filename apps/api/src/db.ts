@@ -200,9 +200,15 @@ const findStickyNoteByIdStmt = db.prepare(`
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
-export const bootstrapAdmin = (): { email: string; password: string } => {
-  const email = normalizeEmail(process.env.QA_UPSKILL_ADMIN_EMAIL ?? "admin@qaupskill.local");
-  const password = process.env.QA_UPSKILL_ADMIN_PASSWORD ?? "Admin123!";
+export const bootstrapAdmin = (): { email: string } => {
+  const adminEmail = process.env.QAU_ADMIN_EMAIL;
+  const password = process.env.QAU_ADMIN_PASSWORD;
+
+  if (!adminEmail || !password) {
+    throw new Error("Missing required QAU_ADMIN_EMAIL or QAU_ADMIN_PASSWORD environment variable.");
+  }
+
+  const email = normalizeEmail(adminEmail);
   const existingAdmin = findUserRowByEmail.get(email) as UserRow | undefined;
 
   if (!existingAdmin) {
@@ -215,7 +221,7 @@ export const bootstrapAdmin = (): { email: string; password: string } => {
     });
   }
 
-  return { email, password };
+  return { email };
 };
 
 export const listUsers = (): PublicUser[] => {

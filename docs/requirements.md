@@ -313,8 +313,8 @@ Functional behavior:
 
 On first startup, if no user with the admin email exists, the server creates a default admin account:
 
-- email: `admin@qaupskill.local` (configurable via `QA_UPSKILL_ADMIN_EMAIL` env var)
-- password: `Admin123!` (configurable via `QA_UPSKILL_ADMIN_PASSWORD` env var)
+- email is supplied through the `QAU_ADMIN_EMAIL` environment variable
+- credentials are supplied through `QAU_ADMIN_EMAIL` and `QAU_ADMIN_PASSWORD` environment variables
 
 ## Data Refresh Behavior
 

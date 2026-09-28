@@ -159,8 +159,8 @@ export default function App() {
   const [notesNotice, setNotesNotice] = useState("");
   const [workspaceTab, setWorkspaceTab] = useState<WorkspaceTab>("users");
   const [loginState, setLoginState] = useState({
-    email: "admin@qaupskill.local",
-    password: "Admin123!"
+    email: "",
+    password: ""
   });
   const [createState, setCreateState] = useState({
     fullName: "",
