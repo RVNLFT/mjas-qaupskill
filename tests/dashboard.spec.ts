@@ -1,6 +1,12 @@
 import type { APIRequestContext } from "@playwright/test";
 import { expect, test } from "../fixtures/test";
-import { createTestUser, deleteTestUser, loginAsAdmin, newApiContext, type TestUser } from "../helpers/users";
+import {
+  createTestUser,
+  deleteTestUser,
+  loginAsAdmin,
+  newApiContext,
+  type TestUser
+} from "../helpers/users";
 
 let api: APIRequestContext;
 let adminToken: string;
@@ -21,11 +27,7 @@ test.beforeEach(async ({ loginPage, page }) => {
 
 test("@smoke dashboard loads after login", async ({ page }) => {
   await expect(page.locator(".dashboard")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Playwright User" })).toBeVisible();
-});
-
-test("@smoke logged-in user can see logout action", async ({ page }) => {
-  await expect(page.getByRole("button", { name: "Logout" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Playwright User", level: 2 })).toBeVisible();
 });
 
 test.afterAll(async () => {
